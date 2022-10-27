@@ -13,8 +13,10 @@ def init_tree(arr, tree, start, end, node = 1):
     right_val = init_tree(arr, tree, mid+1, end, node * 2 + 1)
     min_val = left_val[0] if left_val[0] < right_val[0] else right_val[0]
     max_val = left_val[1] if left_val[1] > right_val[1] else right_val[1]
-    return (min_val, max_val)
-    
+    tree[node] = (min_val, max_val)
+    return tree[node]
+
+
 def get_val(tree, left, right, start, end, node):
     if right < start or left > end:
         return (MAX, MIN)
@@ -22,7 +24,7 @@ def get_val(tree, left, right, start, end, node):
         return tree[node]
 
     mid = (start + end) // 2
-    left_val = get_val(tree, left, right, start, mid, node * 2, )
+    left_val = get_val(tree, left, right, start, mid, node * 2)
     right_val = get_val(tree, left, right, mid+1, end, node * 2 + 1)
     min_val = left_val[0] if left_val[0] < right_val[0] else right_val[0]
     max_val = left_val[1] if left_val[1] > right_val[1] else right_val[1]
@@ -37,6 +39,7 @@ def main():
     tree = [(MAX, MIN) for _ in range(2 * width)]
 
     init_tree(arr, tree, 1, N, 1)
+    
     for _ in range(M):
         start, end = map(int, input().split())
         print(*get_val(tree, start, end, 1, N, 1))
