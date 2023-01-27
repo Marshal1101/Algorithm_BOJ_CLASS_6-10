@@ -3,17 +3,18 @@ import sys
 
 def brute_force(src: str, search: str) -> list:
     ret = []
-    
     begin = 0
     while (begin + len(search) <= len(src)):
         matched = True
         for i in range(len(search)):
             if src[begin + i] != search[i]:
-                match = False
+                matched = False
                 break
 
         if matched:
-            ret.append(begin)
+            ret.append(begin+1)
+            
+        begin += 1
     
     return ret
 
