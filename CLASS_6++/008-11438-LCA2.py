@@ -46,7 +46,7 @@ def main():
     N = int(input())
     graph = [[] for _ in range(N+1)]
     for _ in range(N-1):
-        n1, n2 = map(int, input().split())
+        n1, n2, w = map(int, input().split())
         graph[n1].append(n2)
         graph[n2].append(n1)
 
